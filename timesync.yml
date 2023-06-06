@@ -1,0 +1,9 @@
+---
+- name: timesync 
+  hosts: all
+  vars:
+    timesync_ntp_servers:
+      - hostname: ntp1.aliyun.com
+        iburst: yes
+  roles:
+    - timesync

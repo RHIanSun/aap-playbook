@@ -1,0 +1,18 @@
+---
+- name: change centos8 yum repo from centos repo to aliyun repo
+  hosts: all
+  tasks:
+    - name: make a backup dir
+      ansible.builtin.file:
+        path: /etc/yum.repos.d/bak
+        state: directory
+        mode: '0755'
+    - name: make file backup
+      command: mv /etc/yum.repos.d/*.repo /etc/yum.repos.d/bak/
+    - name: get aliyun repo 
+      command: curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-vault-8.5.2111.repo
+    - name: yum makecache
+      command: yum repolist
+      register: repolist
+    - debug:
+        var: repolist.stdout_lines 

@@ -1,0 +1,9 @@
+---
+- name: time check  
+  hosts: all 
+  tasks:
+    - name: time check from all nodes
+      command: timedatectl 
+      register: time
+    - debug:
+        var: time.stdout_lines

@@ -1,0 +1,5 @@
+---
+- name: config http service via roles
+  hosts: all
+  roles:
+    - apache

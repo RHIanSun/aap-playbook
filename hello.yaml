@@ -1,0 +1,10 @@
+---
+- name: hello
+  hosts: all
+
+  tasks:
+    - name: hello from all nodes
+      command: hostname
+      register: hostname
+    - debug:
+        var: hostname.stdout_lines

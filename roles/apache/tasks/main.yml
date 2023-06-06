@@ -1,0 +1,24 @@
+---
+- name: install http 
+  yum:
+    name: httpd
+    state: latest
+- name: start http if not started
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+- name: config firewalld for apache service
+  firewalld:
+    service: http
+    permanent: yes
+    state: enabled
+    immediate: yes
+- name: Template a file to /var/www/html/index.html
+  template:
+    src: index.html.j2 
+    dest: /var/www/html/index.html
+    owner: apache
+    group: apache
+    mode: '0644'
+    setype: httpd_sys_content_t
